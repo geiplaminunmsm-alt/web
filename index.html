@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEIPLAMIN - Repositorio Minero</title>
+<style>
+/* Estilo general */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fdf6ec;
+    color: #1a1a1a;
+}
+
+/* Header */
+header {
+    background-image: url('GEIPLAMIN.png'); 
+    background-size: contain;    /* Esto hace que la imagen se vea completa */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ff7a00;   /* Rellena los lados con naranja */
+    height: 350px;               
+    width: 100%;
+}
+
+/* Esto borra el texto negro que se amontona sobre la imagen */
+header h1, header p {
+    display: none;
+}
+
+/* Este es el estilo para el título que quieres abajo */
+.titulo-centrado {
+    text-align: center;
+    color: #ff7a00;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+    
+/* Navegación */
+nav {
+    background: #000000;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+nav a {
+    color: #ffb066;
+    margin: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Secciones */
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 12px;
+    display: inline-block;
+    width: 260px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    vertical-align: top;
+}
+button {
+    background: #ff7a00;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+button:hover {
+    background: #e56700;
+}
+
+/* Footer */
+footer {
+    background: #000000;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Calendario */
+.calendar {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #2c3e50;
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+}
+.calendar-header {
+    text-align: center;
+    padding: 15px;
+    font-size: 28px;
+    background: #34495e;
+}
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #ff7a00;
+}
+.days div {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.day {
+    min-height: 80px;
+    border: 1px solid #555;
+    padding: 5px;
+    background: #ecf0f1;
+    color: black;
+}
+.weekend {
+    background: #f5cba7;
+}
+.event {
+    background: #d35400;
+    color: white;
+    padding: 3px;
+    margin-top: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+    /* Esto oculta la sección al inicio */
+#recursos {
+    display: none; 
+}
+
+/* Estilo para que la lista de archivos se vea como un repositorio */
+.lista-repo {
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: left;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.item-archivo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+   /* NUEVO FOOTER ESTILO SME */
+.footer-container {
+    background-color: #000000;
+    color: white;
+    padding: 50px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: left;
+    border-top: 4px solid #ff7a00;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    color: #ff7a00;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.footer-logo img {
+    max-width: 200px;
+    margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-section a:hover {
+    color: #ff7a00;
+}
+
+/* Redes Sociales Grandes */
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    display: inline-block;
+    color: #ff7a00;
+    transition: all 0.3s ease;
+}
+
+.social-icons svg {
+    width: 40px !important; /* Tamaño aumentado */
+    height: 40px !important;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: #ffffff;
+}
+
+.footer-bottom {
+    background: #111;
+    padding: 15px;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    width: 100%;
+}
+    
+</style>
+</head>
+<body>
+
+<header></header> 
+<nav>
+    <a href="javascript:void(0)" onclick="volverInicio()">Inicio</a>
+    <a href="javascript:void(0)" onclick="mostrarMaterial()">Material</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('quienes-somos')">Nosotros</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('grupos-inv')">Grupos</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('convocatoria')">Convocatoria</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('software')">Software</a>
+    <a href="javascript:void(0)" onclick="mostrarSeccion('eventos')">Eventos</a>
+</nav>
+
+<div class="titulo-centrado">
+    Repositorio de Planeamiento Minero UNMSM
+</div>
+
+<section id="inicio">
+    <p>Bienvenidos al repositorio académico enfocado en planeamiento minero para estudiantes de Ingeniería de Minas.</p>
+<div class="card">
+<h3>📚 Material Bibliográfico</h3>
+<p>Libros, PDFs y contenido académico de planeamiento.</p>
+<button onclick="mostrarMaterial()">Explorar</button>
+</div>
+
+<div class="card">
+    <h3>🎓Eventos y talleres</h3>
+    <p>Actividades programadas.</p>
+    <button onclick="mostrarSeccion('eventos')">Ir al calendario</button>
+</div>
+
+<div class="card">
+    <h3>🎥 Charlas</h3>
+    <p>Grabaciones de charlas anteriores.</p>
+    <button onclick="window.open('https://drive.google.com/drive/folders/15pMKip8ih5PICY_FSBlsQsqOQPW4va9Z', '_blank')">Ver Charlas</button>
+</div>
+</section> 
+
+<section id="quienes-somos" style="display:none;">
+    <h2>👥 ¿Quiénes Somos?</h2>
+    <div class="lista-repo" style="text-align: justify; line-height: 1.8;">
+        <p style="font-size: 18px; color: #333; margin-bottom: 25px;">
+            <strong>GEIPLAMIN</strong> es un colectivo estudiantil de la Escuela Profesional de Ingeniería de Minas de la <strong>UNMSM</strong>, dedicado a explorar, desarrollar y compartir conocimientos especializados en planeamiento minero, fomentando el aprendizaje y la investigación en este campo estratégico de la industria.
+        </p>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <div style="flex: 1; min-width: 280px; background: #fff8f0; padding: 20px; border-left: 5px solid #ff7a00; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <h3 style="margin-top: 0; color: #ff7a00;">🎯 Misión</h3>
+                <p>Impulsar el perfil profesional de los miembros del Capítulo, desarrollando una sólida base teórica y habilidades prácticas avanzadas en el ámbito del Planeamiento Minero.</p>
+            </div>
+
+            <div style="flex: 1; min-width: 280px; background: #f0f4f8; padding: 20px; border-left: 5px solid #2c3e50; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <h3 style="margin-top: 0; color: #2c3e50;">👁️ Visión</h3>
+                <p>Ser reconocidos a nivel internacional como un grupo de estudio referente, capaz de formar líderes estudiantiles e ingenieros competentes que transformen la minería del futuro.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="grupos-inv" style="display:none;">
+    <h2>🔬 Grupos de Investigación</h2>
+    <div class="lista-repo">
+        <div class="item-archivo">
+            <div>
+                <strong>📂 Repositorio de Proyectos e Investigaciones</strong>
+                <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">Accede a nuestra carpeta compartida de Google Drive.</p>
+            </div>
+            <a href="https://drive.google.com/drive/folders/1CYGBnZrehxe5AeovOPb6-GS9XCehoefC?usp=drive_link" target="_blank">
+                <button style="background: #2ecc71;">Abrir Drive</button>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="convocatoria" style="display:none;">
+    <h2>📢 Convocatoria GEIPLAMIN 2026</h2>
+    <div class="lista-repo" style="text-align: center; padding: 50px;">
+        <p style="color: #888; font-style: italic;">Próximamente publicaremos las bases aquí. ⚒️</p>
+    </div>
+</section>
+    
+<section id="software" style="display:none;">
+<h2>Software</h2>
+<p>Manuales, guías y acceso a licencias de software minero.</p>
+<div class="card">Manual Datamine</div>
+<div class="card">Manual Deswik</div>
+<div class="card">Licencias (acceso restringido)</div>
+</section>
+
+
+<section id="eventos" style="display:none;">
+<h2>Calendario 2026</h2>
+<p>Agenda de actividades GEIPLAMIN</p>
+
+<!-- CALENDARIO ABRIL 2026 -->
+<div class="calendar">
+<div class="calendar-header">Abril 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div>
+<div class="day">1</div><div class="day">2</div><div class="day">3</div>
+<div class="day weekend">4</div><div class="day weekend">5</div>
+<div class="day">6</div><div class="day">7</div><div class="day">8</div>
+<div class="day">9</div><div class="day">10</div>
+<div class="day weekend">11</div><div class="day weekend">12</div>
+<div class="day">13</div><div class="day">14</div><div class="day">15</div>
+<div class="day">16</div><div class="day">17</div>
+<div class="day weekend">18</div><div class="day weekend">19</div>
+<div class="day">20</div><div class="day">21</div><div class="day">22</div>
+<div class="day">23</div><div class="day">24</div>
+<div class="day weekend">25</div><div class="day weekend">26</div>
+<div class="day">27</div><div class="day">28</div><div class="day">29</div>
+<div class="day">30</div>
+</div>
+</div>
+
+<!-- CALENDARIO MAYO 2026 -->
+<div class="calendar">
+<div class="calendar-header">Mayo 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div><div class="day"></div>
+<div class="day">1</div><div class="day">2</div>
+<div class="day weekend">3</div><div class="day weekend">4</div>
+<div class="day">5</div><div class="day">6</div><div class="day">7</div>
+<div class="day">8</div><div class="day">9</div>
+<div class="day weekend">10</div><div class="day weekend">11</div>
+<div class="day">12</div><div class="day">13</div><div class="day">14</div>
+<div class="day">15</div><div class="day">16</div>
+<div class="day weekend">17</div><div class="day weekend">18</div>
+<div class="day">19</div><div class="day">20</div><div class="day">21</div>
+<div class="day">22</div><div class="day">23</div>
+<div class="day weekend">24</div><div class="day weekend">25</div>
+<div class="day">26</div><div class="day">27</div><div class="day">28</div>
+<div class="day">29</div><div class="day">30</div>
+<div class="day weekend">31</div>
+</div>
+</div>
+
+<!-- CALENDARIO JUNIO 2026 -->
+<div class="calendar">
+<div class="calendar-header">Junio 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day">1</div><div class="day">2</div><div class="day">3</div>
+<div class="day">4</div><div class="day">5</div>
+<div class="day weekend">6</div><div class="day weekend">7</div>
+<div class="day">8</div><div class="day">9</div><div class="day">10</div>
+<div class="day">11</div><div class="day">12</div>
+<div class="day weekend">13</div><div class="day weekend">14</div>
+<div class="day">15</div><div class="day">16</div><div class="day">17</div>
+<div class="day">18</div><div class="day">19</div>
+<div class="day weekend">20</div><div class="day weekend">21</div>
+<div class="day">22</div><div class="day">23</div><div class="day">24</div>
+<div class="day">25</div><div class="day">26</div>
+<div class="day weekend">27</div><div class="day weekend">28</div>
+<div class="day">29</div><div class="day">30</div>
+</div>
+</div>
+
+<!-- CALENDARIO JULIO 2026 -->
+<div class="calendar">
+<div class="calendar-header">Julio 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div><div class="day"></div><div class="day">1</div><div class="day">2</div>
+<div class="day weekend">3</div><div class="day weekend">4</div>
+<div class="day">5</div><div class="day">6</div><div class="day">7</div>
+<div class="day">8</div><div class="day">9</div>
+<div class="day weekend">10</div><div class="day weekend">11</div>
+<div class="day">12</div><div class="day">13</div><div class="day">14</div>
+<div class="day">15</div><div class="day">16</div>
+<div class="day weekend">17</div><div class="day weekend">18</div>
+<div class="day">19</div><div class="day">20</div><div class="day">21</div>
+<div class="day">22</div><div class="day">23</div>
+<div class="day weekend">24</div><div class="day weekend">25</div>
+<div class="day">26</div><div class="day">27</div><div class="day">28</div>
+<div class="day">29</div><div class="day">30</div>
+<div class="day weekend">31</div>
+</div>
+</div>
+
+<!-- CALENDARIO AGOSTO 2026 -->
+<div class="calendar">
+<div class="calendar-header">Agosto 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day">1</div>
+<div class="day weekend">2</div><div class="day weekend">3</div>
+<div class="day">4</div><div class="day">5</div><div class="day">6</div>
+<div class="day">7</div><div class="day">8</div>
+<div class="day weekend">9</div><div class="day weekend">10</div>
+<div class="day">11</div><div class="day">12</div><div class="day">13</div>
+<div class="day">14</div><div class="day">15</div>
+<div class="day weekend">16</div><div class="day weekend">17</div>
+<div class="day">18</div><div class="day">19</div><div class="day">20</div>
+<div class="day">21</div><div class="day">22</div>
+<div class="day weekend">23</div><div class="day weekend">24</div>
+<div class="day">25</div><div class="day">26</div><div class="day">27</div>
+<div class="day">28</div><div class="day">29</div>
+<div class="day weekend">30</div><div class="day weekend">31</div>
+</div>
+</div>
+
+<!-- CALENDARIO SEPTIEMBRE 2026 -->
+<div class="calendar">
+<div class="calendar-header">Septiembre 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div><div class="day">1</div><div class="day">2</div><div class="day">3</div>
+<div class="day weekend">4</div><div class="day weekend">5</div>
+<div class="day">6</div><div class="day">7</div><div class="day">8</div>
+<div class="day">9</div><div class="day">10</div>
+<div class="day weekend">11</div><div class="day weekend">12</div>
+<div class="day">13</div><div class="day">14</div><div class="day">15</div>
+<div class="day">16</div><div class="day">17</div>
+<div class="day weekend">18</div><div class="day weekend">19</div>
+<div class="day">20</div><div class="day">21</div><div class="day">22</div>
+<div class="day">23</div><div class="day">24</div>
+<div class="day weekend">25</div><div class="day weekend">26</div>
+<div class="day">27</div><div class="day">28</div><div class="day">29</div>
+<div class="day">30</div>
+</div>
+</div>
+
+<!-- CALENDARIO OCTUBRE 2026 -->
+<div class="calendar">
+<div class="calendar-header">Octubre 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div><div class="day"></div><div class="day">1</div><div class="day">2</div>
+<div class="day weekend">3</div><div class="day weekend">4</div>
+<div class="day">5</div><div class="day">6</div><div class="day">7</div>
+<div class="day">8</div><div class="day">9</div>
+<div class="day weekend">10</div><div class="day weekend">11</div>
+<div class="day">12</div><div class="day">13</div><div class="day">14</div>
+<div class="day">15</div><div class="day">16</div>
+<div class="day weekend">17</div><div class="day weekend">18</div>
+<div class="day">19</div><div class="day">20</div><div class="day">21</div>
+<div class="day">22</div><div class="day">23</div>
+<div class="day weekend">24</div><div class="day weekend">25</div>
+<div class="day">26</div><div class="day">27</div><div class="day">28</div>
+<div class="day">29</div><div class="day">30</div>
+<div class="day weekend">31</div>
+</div>
+</div>
+
+<!-- CALENDARIO NOVIEMBRE 2026 -->
+<div class="calendar">
+<div class="calendar-header">Noviembre 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day">1</div>
+<div class="day weekend">2</div><div class="day weekend">3</div>
+<div class="day">4</div><div class="day">5</div><div class="day">6</div>
+<div class="day">7</div><div class="day">8</div>
+<div class="day weekend">9</div><div class="day weekend">10</div>
+<div class="day">11</div><div class="day">12</div><div class="day">13</div>
+<div class="day">14</div><div class="day">15</div>
+<div class="day weekend">16</div><div class="day weekend">17</div>
+<div class="day">18</div><div class="day">19</div><div class="day">20</div>
+<div class="day">21</div><div class="day">22</div>
+<div class="day weekend">23</div><div class="day weekend">24</div>
+<div class="day">25</div><div class="day">26</div><div class="day">27</div>
+<div class="day">28</div><div class="day">29</div>
+<div class="day weekend">30</div>
+</div>
+</div>
+
+<!-- CALENDARIO DICIEMBRE 2026 -->
+<div class="calendar">
+<div class="calendar-header">Diciembre 2026</div>
+<div class="days">
+<div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div><div>D</div>
+</div>
+<div class="grid">
+<div class="day"></div><div class="day"></div><div class="day"></div><div class="day">1</div><div class="day">2</div>
+<div class="day weekend">3</div><div class="day weekend">4</div>
+<div class="day">5</div><div class="day">6</div><div class="day">7</div>
+<div class="day">8</div><div class="day">9</div>
+<div class="day weekend">10</div><div class="day weekend">11</div>
+<div class="day">12</div><div class="day">13</div><div class="day">14</div>
+<div class="day">15</div><div class="day">16</div>
+<div class="day weekend">17</div><div class="day weekend">18</div>
+<div class="day">19</div><div class="day">20</div><div class="day">21</div>
+<div class="day">22</div><div class="day">23</div>
+<div class="day weekend">24</div><div class="day weekend">25</div>
+<div class="day">26</div><div class="day">27</div><div class="day">28</div>
+<div class="day">29</div><div class="day">30</div>
+<div class="day weekend">31</div>
+</div>
+</div>
+
+</section>
+
+<section id="recursos">
+        <h2>Material Bibliográfico</h2>
+        <div class="lista-repo">
+    <div class="item-archivo">
+        <div><strong>📕 Manual Práctico MinePlan N° 1</strong></div>
+        <a href="Manual Práctico MinePlan N° 1 - Mallas de perforación.pdf" target="_blank"><button>Ver PDF</button></a>
+    </div>
+
+    <div class="item-archivo">
+        <div><strong>📙 Algoritmo de Lerch & Grossman</strong></div>
+        <a href="ALGORITMO DE LERCH & GROSSMAN.pdf" target="_blank"><button>Ver PDF</button></a>
+    </div>
+
+    <div class="item-archivo">
+        <div><strong>📗 Uso de SIMSCHED y QPIT</strong></div>
+        <a href="USO DE SIMSCHED Y QPIT PARA LA OPTIMIZACIÓN Y DISEÑO EN OPENPIT.pdf" target="_blank"><button>Ver PDF</button></a>
+    </div>
+
+    <div class="item-archivo">
+        <div><strong>📘 Categorización de Recursos Minerales</strong></div>
+        <a href="CATEGORIZACIÓN DE RECURSOS MINERALES.pdf" target="_blank"><button>Ver PDF</button></a>
+    </div>
+
+    <div class="item-archivo">
+        <div><strong>📓 Mantenimiento Tipo Overhaul</strong></div>
+        <a href="IMPLEMENTACIÓN DE MANTENIMIENTO TIPO OVERHAUL PARA AUMENTAR LA DISPONIBILIDAD EN EQUIPOS MINEROS.pdf" target="_blank"><button>Ver PDF</button></a>
+    </div>
+
+    <div class="item-archivo">
+        <div><strong>📔 Componentes Geométricos Open Pit</strong></div>
+        <a href="COMPONENTES GEOMÉTRICOS EN EL DISEÑO DE MINAS OPEN PIT.pdf" target="_blank"><button>Ver PDF</button></a>
+    </div>
+</div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <div class="footer-logo">
+                <img src="LOGO.png" alt="Logo GEIPLAMIN">
+            </div>
+            <p><strong>GEIPLAMIN</strong></p>
+            <p>Grupo de Estudio e Investigación de Planeamiento Minero - UNMSM</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Networking</h3>
+            <a href="javascript:void(0)" onclick="mostrarSeccion('quienes-somos')">Nosotros</a>
+            <a href="javascript:void(0)" onclick="mostrarSeccion('grupos-inv')">Grupos de Investigación</a>
+            <a href="javascript:void(0)" onclick="mostrarSeccion('convocatoria')">Directiva / Convocatoria</a>
+            <a href="javascript:void(0)" onclick="mostrarSeccion('software')">Software Minero</a>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contáctanos</h3>
+            <p>📧 geiplamin.unmsm.24@gmail.com</p>
+            <p>📍 Facultad de Ingeniería de Minas - UNMSM</p>
+            
+            <div class="social-icons">
+                <a href="https://www.facebook.com/GrupodeestudioeInvestigaciondePlaneamientoMinero" target="_blank">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" /></svg>
+                </a>
+                <a href="https://www.linkedin.com/company/geiplamin-unmsm/" target="_blank">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5V13.2a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3V10.2H10.2v8.3h2.72v-4.4c0-1.04.88-1.9 1.9-1.9s1.9.86 1.9 1.9v4.4h2.72M6.25 10.2v8.3h2.73v-8.3H6.25M7.62 6a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 7.62 6Z" /></svg>
+                </a>
+                <a href="https://www.instagram.com/geiplamin/" target="_blank">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3Z" /></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 GEIPLAMIN - Todos los derechos reservados.
+    </div>
+</footer>
+
+<script>
+// 1. Esta función se queda igual (es la que apaga todo)
+function ocultarTodo() {
+    const secciones = ['inicio', 'software', 'eventos', 'recursos', 'quienes-somos', 'grupos-inv', 'convocatoria'];
+    secciones.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = 'none';
+    });
+}
+
+// 2. Esta función es la que hace la "magia" de la pestaña nueva
+function mostrarSeccion(idSeccion) {
+    ocultarTodo(); // Borra lo que haya en pantalla
+    const seccion = document.getElementById(idSeccion);
+    if(seccion) {
+        seccion.style.display = 'block'; // Muestra solo lo que pediste
+    }
+    window.scrollTo(0, 0); // Sube al inicio de la página
+}
+
+// 3. Atajo para el material
+function mostrarMaterial() {
+    mostrarSeccion('recursos');
+}
+
+// 4. AQUÍ ESTÁ EL CAMBIO IMPORTANTE:
+// Ahora, al volver al inicio, solo se verá el bloque de las "Cards"
+function volverInicio() {
+    ocultarTodo(); 
+    document.getElementById('inicio').style.display = 'block'; 
+    window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
